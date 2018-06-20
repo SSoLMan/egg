@@ -32,7 +32,7 @@ send egg-ready to master,
 `beforeClose`注册方法至一个LIFO队列, 在app/agent实例的`close`方法被调用后, 按顺序执行。
 
 e.g.:
-```javascript
+```js
 // app.js
 console.time('app before start 200ms');
 console.time('app before start 100ms');
