@@ -17,6 +17,7 @@ Basics:
   Schedule: /basics/schedule.html
   Extend: /basics/extend.html
   Custom init: /basics/app-start.html
+  Lifecyle: /basics/lifecyle.html
 Core:
   Development: /core/development.html
   Unit Testing: /core/unittest.html
