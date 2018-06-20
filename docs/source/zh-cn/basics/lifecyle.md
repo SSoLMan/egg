@@ -3,23 +3,26 @@ title: 生命周期
 
 Egg提供了应用启动(`beforeStart`), 启动完成(`ready`), 关闭(`beforeClose`)这三个生命周期方法。
 ```
-  init master process
+   init master process
            ⬇
-   init agent process
-           ⬇
-loader.load | beforeStart
-           ⬇
-      await ready
-           ⬇
-   call ready callback
-           ⬇
-    init app processes
+init agent worker process
            ⬇
 loader.load | beforeStart
            ⬇
-      await ready
+ await agent worker ready
            ⬇
    call ready callback
+           ⬇
+init app worker processes
+           ⬇
+loader.load | beforeStart
+           ⬇
+ await app workers ready
+           ⬇
+   call ready callback
+           ⬇
+send egg-ready to master,
+    agent,app workers
 ```
 ## beforeStart
 `beforeStart`由[`ready-callback`](https://www.npmjs.com/package/ready-callback)实现, 调用后将生产一个task存入缓存中, 传入的`scope`将在[`nextTick`](https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_process_nexttick_callback_args)调用, 调用完成后从缓存中删除task。当缓存中没有任务之后, 调用`ready()`注册的callback。
